@@ -33,3 +33,27 @@ func TestInsertionSort(t *testing.T) {
 	}
 
 }
+
+func BenchmarkInsertionSortBestCase(b *testing.B) {
+	inputSize := 1000000
+	alreadySorted := make([]int, inputSize)
+	for i := 0; i < inputSize; i++ {
+		alreadySorted[i] = i
+	}
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		InsertionSort(&alreadySorted)
+	}
+}
+
+func BenchmarkInsertionSortWorstCase(b *testing.B) {
+	inputSize := 1000000
+	sortedDecreasing := make([]int, inputSize)
+	for i := inputSize - 1; i >= 0; i-- {
+		sortedDecreasing[i] = i
+	}
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		InsertionSort(&sortedDecreasing)
+	}
+}
