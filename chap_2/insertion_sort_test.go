@@ -23,6 +23,10 @@ func TestInsertionSort(t *testing.T) {
 			input: []int{9, 8, 7, 5, -1, -2, 4, 0, 2, 2, 2},
 			want:  []int{-2, -1, 0, 2, 2, 2, 4, 5, 7, 8, 9},
 		},
+		{
+			input: []int{9, 9, 9, 9, 9},
+			want:  []int{9, 9, 9, 9, 9},
+		},
 	}
 
 	for _, testCase := range cases {
