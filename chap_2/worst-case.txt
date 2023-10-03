@@ -1,0 +1,36 @@
+goos: linux
+goarch: amd64
+pkg: example.com/chap_2
+cpu: AMD Ryzen 7 2700X Eight-Core Processor         
+BenchmarkInsertionSortWorstCase1-16    	   91282	     13636 ns/op
+BenchmarkInsertionSortWorstCase1-16    	   88318	     13373 ns/op
+BenchmarkInsertionSortWorstCase1-16    	   88195	     13380 ns/op
+BenchmarkInsertionSortWorstCase1-16    	   86756	     13300 ns/op
+BenchmarkInsertionSortWorstCase1-16    	   85117	     14275 ns/op
+BenchmarkInsertionSortWorstCase1-16    	   87741	     13879 ns/op
+BenchmarkInsertionSortWorstCase1-16    	   84368	     13601 ns/op
+BenchmarkInsertionSortWorstCase1-16    	   88406	     13417 ns/op
+BenchmarkInsertionSortWorstCase1-16    	   75139	     13553 ns/op
+BenchmarkInsertionSortWorstCase1-16    	   87642	     13283 ns/op
+BenchmarkInsertionSortWorstCase2-16    	   33832	     29806 ns/op
+BenchmarkInsertionSortWorstCase2-16    	   35348	     30114 ns/op
+BenchmarkInsertionSortWorstCase2-16    	   35242	     30190 ns/op
+BenchmarkInsertionSortWorstCase2-16    	   41102	     29383 ns/op
+BenchmarkInsertionSortWorstCase2-16    	   33861	     30156 ns/op
+BenchmarkInsertionSortWorstCase2-16    	   33661	     30182 ns/op
+BenchmarkInsertionSortWorstCase2-16    	   35246	     31151 ns/op
+BenchmarkInsertionSortWorstCase2-16    	   38929	     30849 ns/op
+BenchmarkInsertionSortWorstCase2-16    	   35281	     30391 ns/op
+BenchmarkInsertionSortWorstCase2-16    	   33402	     30169 ns/op
+BenchmarkInsertionSortWorstCase3-16    	    9706	    104453 ns/op
+BenchmarkInsertionSortWorstCase3-16    	   10150	    118555 ns/op
+BenchmarkInsertionSortWorstCase3-16    	    9528	    105971 ns/op
+BenchmarkInsertionSortWorstCase3-16    	   11618	     94677 ns/op
+BenchmarkInsertionSortWorstCase3-16    	   10177	    102006 ns/op
+BenchmarkInsertionSortWorstCase3-16    	    9691	    104888 ns/op
+BenchmarkInsertionSortWorstCase3-16    	    8990	    111436 ns/op
+BenchmarkInsertionSortWorstCase3-16    	    9771	    107367 ns/op
+BenchmarkInsertionSortWorstCase3-16    	    9729	    113622 ns/op
+BenchmarkInsertionSortWorstCase3-16    	   10566	    104202 ns/op
+signal: interrupt
+FAIL	example.com/chap_2	149.921s

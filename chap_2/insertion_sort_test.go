@@ -38,26 +38,90 @@ func TestInsertionSort(t *testing.T) {
 
 }
 
-func BenchmarkInsertionSortBestCase(b *testing.B) {
-	inputSize := 1000000
-	alreadySorted := make([]int, inputSize)
+// Chapter 2 shows Insertion Sort's best case scenario
+// should have O(n) (a.k.a linear) time complexity)
+// Lets use Go's built-in benchmarking tools to verify that.
+
+func buildSortedSlice(inputSize int) []int {
+    sorted := make([]int, inputSize)
 	for i := 0; i < inputSize; i++ {
-		alreadySorted[i] = i
+		sorted[i] = i
 	}
+    return sorted
+}
+
+func BenchmarkBestCase1(b *testing.B) {
+	input := buildSortedSlice(1000)
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		InsertionSort(&alreadySorted)
+		InsertionSort(&input)
 	}
 }
 
-func BenchmarkInsertionSortWorstCase(b *testing.B) {
-	inputSize := 1000000
-	sortedDecreasing := make([]int, inputSize)
-	for i := inputSize - 1; i >= 0; i-- {
-		sortedDecreasing[i] = i
-	}
+func BenchmarkBestCase2(b *testing.B) {
+	input := buildSortedSlice(10000)
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		InsertionSort(&sortedDecreasing)
+		InsertionSort(&input)
+	}
+}
+
+func BenchmarkBestCase3(b *testing.B) {
+	input := buildSortedSlice(100000)
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		InsertionSort(&input)
+	}
+}
+
+func BenchmarkBestCase4(b *testing.B) {
+	input := buildSortedSlice(1000000)
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		InsertionSort(&input)
+	}
+}
+
+// We also learned that Insertion Sort's worst case
+// scenario's time complexity is O(n^2). Let's check
+// that
+
+func buildWorstCaseInput(inputSize int)[]int {
+	sortedDecreasing := make([]int, inputSize)
+	for i := 0; i < inputSize; i++ {
+		sortedDecreasing[i] = inputSize - i
+	}
+    return sortedDecreasing
+}
+
+func BenchmarkInsertionSortWorstCase1(b *testing.B) {
+    input := buildWorstCaseInput(10000)
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		InsertionSort(&input)
+	}
+}
+
+func BenchmarkInsertionSortWorstCase2(b *testing.B) {
+    input := buildWorstCaseInput(20000)
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		InsertionSort(&input)
+	}
+}
+
+func BenchmarkInsertionSortWorstCase3(b *testing.B) {
+    input := buildWorstCaseInput(30000)
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		InsertionSort(&input)
+	}
+}
+
+func BenchmarkInsertionSortWorstCase4(b *testing.B) {
+    input := buildWorstCaseInput(40000)
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		InsertionSort(&input)
 	}
 }
