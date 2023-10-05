@@ -4,26 +4,27 @@ import "fmt"
 
 // Assumes the slice of the input bounded
 // by start, middle and end are locally sorted */
-func Merge(i *[]int, start int, middle int, end int) {
+func Merge(input []int, start int, middle int, end int) {
 	left := make([]int, middle-start)
-	copy(left, (*i)[:middle])
+	copy(left, input[:middle])
 	right := make([]int, end-middle)
-	copy(right, (*i)[middle:end])
+	copy(right, input[middle:end])
 
 	l := 0
 	r := 0
 	for l < len(left) || r < len(right) {
 		if l >= len(left) {
-			(*i)[start+l+r] = right[r]
+			// assign r
+			input[start+l+r] = right[r]
 			r++
 		} else if r >= len(right) {
-			(*i)[start+l+r] = left[l]
+			input[start+l+r] = left[l]
 			l++
 		} else if left[l] < right[r] {
-			(*i)[start+l+r] = left[l]
+			input[start+l+r] = left[l]
 			l++
 		} else {
-			(*i)[start+l+r] = right[r]
+			input[start+l+r] = right[r]
 			r++
 		}
 	}
