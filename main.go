@@ -7,8 +7,12 @@ import (
 )
 
 func main() {
-	slice := []int{5, 4, 6, 1, 3, 9, 9, 12, 5}
-	chap2.InsertionSort(&slice)
-	fmt.Println(slice)
-
+	input := []int{4, 3, 2}
+	chap2.MergeSort(input, 0, len(input))
+	fmt.Println(input)
 }
+
+// 3, 2, 1
+
+// [3] ..  [2, 1]
+// ou [3, 2] .. [1]
