@@ -6,26 +6,7 @@ import (
 )
 
 func TestMergeSort(t *testing.T) {
-	cases := []Case{
-		{
-			input: []int{1, 2, 3, 4, 5},
-			want:  []int{1, 2, 3, 4, 5},
-		},
-		{
-			input: []int{},
-			want:  []int{},
-		},
-		{
-			input: []int{9, 8, 7, 5, -1, -2, 4, 0, 2, 2, 2},
-			want:  []int{-2, -1, 0, 2, 2, 2, 4, 5, 7, 8, 9},
-		},
-		{
-			input: []int{9, 9, 9, 9, 9},
-			want:  []int{9, 9, 9, 9, 9},
-		},
-	}
-
-	for _, testCase := range cases {
+	for _, testCase := range GetTestCases() {
 		result := MergeSort(testCase.input)
 		if !reflect.DeepEqual(result, testCase.want) {
 			t.Fatalf("want: %v, got: %v ", testCase.want, testCase.input)
@@ -39,24 +20,67 @@ func TestMergeSort(t *testing.T) {
 // O(n) while Merge Sort is still O(n log(n))
 // By running this test, we can see that merge sort performs way worse for
 // this input size in the best case scenario
+
+// How InsertionSort performed in this case:
+// 1777 ns/op    0 B/op        0 allocs/op
+// How MergeSort performed
+// 245823 ns/op  163921 B/op   3012 allocs/op
 func BenchmarkMergeSortBestCase1(b *testing.B) {
-	input := buildSortedSlice(1000)
-	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		input := buildSortedSlice(1000)
+		b.StartTimer()
 		MergeSort(input)
 	}
 }
 
-// We should see gains in the worst case when comparing to InsertionSort, but we do not
-// In fact, the implementation of MergeSort being tested here is way worse than the InsertionSort
-// implementation. Let's see if we can improve our MergeSort to actually make it perform better.
-// The benchmark says that this implementation does 33851 allocs/op, while our insertion sort
-// does 0. This should be the source of the problems.
+// We should see gains in the worst case when comparing to InsertionSort
+// In fact, the implementation of MergeSort being tested herealready performs 10x better for this input size.
+// We'll also try to improve this MergeSort implementation after this.
+// InsertionSort
+// 36343372 ns/op               0 B/op          0 allocs/op
+// MergeSort
+// 2872028 ns/op         3282112 B/op      33851 allocs/op
 func BenchmarkMergeSortWorstCase1(b *testing.B) {
-	input := buildWorstCaseInput(10000)
-	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		input := buildWorstCaseInput(10000)
+		b.StartTimer()
 		MergeSort(input)
+	}
+}
+
+// Let's verify that our enhanced merge sort works as expected
+func TestBetterMergeSort(t *testing.T) {
+	for _, testCase := range GetTestCases() {
+		BetterMergeSort(&testCase.input, 0, len(testCase.input))
+		if !reflect.DeepEqual(testCase.input, testCase.want) {
+			t.Fatalf("want: %v, got: %v ", testCase.want, testCase.input)
+		}
+	}
+}
+
+// Let's see if it got better
+// 2872028 ns/op         3282112 B/op      33851 allocs/op (FIRST VERSION)
+// 1343224 ns/op         1110798 B/op      19998 allocs/op (THIS VERSION)
+// Yay! More than 2x improvement by reducing the number of allocations!
+func BenchmarkBetterMergeSortWorstCase1(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		input := buildWorstCaseInput(10000)
+		b.StartTimer()
+		BetterMergeSort(&input, 0, len(input))
+	}
+}
+
+// What if we grow the input size?
+// Still, it is performing worse than the InsetionSort
+func BenchmarkBetterMergeSortWorstCase2(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		input := buildWorstCaseInput(40000)
+		b.StartTimer()
+		BetterMergeSort(&input, 0, len(input))
 	}
 }
 
