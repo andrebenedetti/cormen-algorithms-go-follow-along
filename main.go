@@ -7,12 +7,6 @@ import (
 )
 
 func main() {
-	input := []int{4, 3, 2}
-	chap2.MergeSort(input, 0, len(input))
-	fmt.Println(input)
+	s1 := []int{5, 3, 1, 2, 3, 6, 7, 8, 10}
+	fmt.Println(chap2.MergeSort(s1))
 }
-
-// 3, 2, 1
-
-// [3] ..  [2, 1]
-// ou [3, 2] .. [1]
